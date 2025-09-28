@@ -1,8 +1,3 @@
-Sure! Here’s a clean and professional `README.md` for your GitHub repository. You can put it in the root of your project.
-
----
-
-```markdown
 # MoMo Transactions API
 
 This project implements a REST API for mobile money SMS transactions. It includes:
@@ -18,7 +13,7 @@ This project implements a REST API for mobile money SMS transactions. It include
 
 ```
 
-project-root/
+MoMo_SMS/
 │
 ├─ api/
 │   └─ server.py        # REST API with CRUD endpoints and Basic Auth
@@ -30,6 +25,7 @@ project-root/
 │   └─ api_docs.md      # API documentation
 │
 ├─ screenshots/         # Screenshots of API test cases
+|- modified_sms_v2.xml
 ├─ README.md            # Setup instructions
 └─ report.pdf           # PDF report with security analysis and DSA results
 
@@ -130,9 +126,3 @@ This README covers:
 - Authentication info  
 - How to test the API  
 
----
-
-If you want, I can now **draft the full `report.pdf` content** including **API security intro, DSA results, and Basic Auth reflection**, so your assignment is fully ready to submit.  
-
-Do you want me to do that next?
-```
