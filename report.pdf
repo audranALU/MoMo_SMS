@@ -1,0 +1,193 @@
+MoMo Transactions API – Assignment Report
+Author: Aurdan Ndayisenga
+ Date: September 2025
+
+1. Introduction to API Security
+An API (Application Programming Interface) allows clients such as mobile apps or web apps to interact with a backend service. Securing an API is critical to prevent unauthorized access, data breaches, and misuse.
+In this project, Basic Authentication is used. It requires clients to provide a username and password with each request. While simple to implement, Basic Auth has limitations:
+Credentials are sent in Base64-encoded form, which is not encrypted.
+
+
+No built-in mechanism for token expiration or session management.
+
+
+Vulnerable to interception over unsecured networks (HTTP instead of HTTPS).
+
+
+Stronger alternatives include:
+JWT (JSON Web Tokens): Tokens are encrypted and can expire automatically.
+
+
+OAuth2: Provides secure delegated access without exposing passwords.
+
+
+For this assignment, Basic Auth is sufficient for demonstration and local testing.
+
+2. API Documentation
+The API allows CRUD operations on mobile money SMS transactions. All endpoints require Basic Authentication.
+Base URL: http://localhost:8000
+Endpoint
+Method
+Description
+Request Example
+Response Example
+Error Codes
+/transactions
+GET
+List all transactions
+curl -u admin:password http://localhost:8000/transactions
+[{"id":1,"transaction_type":"received",...}]
+401 Unauthorized, 404 Not Found
+/transactions/{id}
+GET
+Retrieve one transaction by ID
+curl -u admin:password http://localhost:8000/transactions/1
+{"id":1,"transaction_type":"received",...}
+401 Unauthorized, 404 Not Found, 400 Bad Request
+/transactions
+POST
+Add a new transaction
+JSON body
+Returns new transaction with assigned ID
+401 Unauthorized, 400 Bad Request
+/transactions/{id}
+PUT
+Update existing transaction
+JSON body
+Returns updated transaction
+401 Unauthorized, 404 Not Found, 400 Bad Request
+/transactions/{id}
+DELETE
+Delete transaction by ID
+curl -u admin:password -X DELETE ...
+{"message":"Deleted"}
+401 Unauthorized, 404 Not Found, 400 Bad Request
+
+Full documentation with request/response examples is included in docs/api_docs.md.
+
+3. Data Parsing & DSA Comparison
+3.1 Parsing XML
+The dataset modified_sms_v2.xml contains SMS transaction records. Each record includes:
+Transaction type (received / sent)
+
+
+Amount
+
+
+Sender / Receiver
+
+
+Timestamp
+
+
+Raw SMS body
+
+
+Python’s xml.etree.ElementTree library is used to parse XML into JSON-like dictionaries. Two data structures store transactions:
+List: Stores transactions in order.
+
+
+Dictionary: Maps id → transaction for faster lookup.
+
+
+
+3.2 DSA Comparison
+Two search methods were implemented:
+Linear Search (List): Iterates through all transactions until the desired ID is found.
+
+
+Complexity: O(n)
+
+
+Slower for large datasets
+
+
+Dictionary Lookup: Uses id as key for direct access.
+
+
+Complexity: O(1)
+
+
+Much faster and efficient for searches
+
+
+Example results (first 20 transactions):
+Transaction ID
+Linear Search Time (ms)
+Dictionary Lookup Time (ms)
+1
+0.025
+0.001
+2
+0.027
+0.001
+…
+…
+…
+20
+0.041
+0.001
+
+Observation: Dictionary lookup is consistently faster due to direct key-based access. For larger datasets, the difference becomes even more significant.
+Suggestion: For extremely large datasets, a database with indexed queries or hash tables can improve efficiency further.
+
+4. Testing & Validation
+The API was tested using Postman and curl. Screenshots are included in the screenshots/ folder.
+Test cases:
+GET /transactions – successful authentication
+
+
+GET /transactions – wrong credentials → 401 Unauthorized
+
+
+POST /transactions – successfully adding a transaction
+
+
+PUT /transactions/{id} – successfully updating a transaction
+
+
+DELETE /transactions/{id} – successfully deleting a transaction
+
+
+All endpoints responded correctly with JSON, status codes, and error handling.
+
+5. Reflection on Basic Auth Limitations
+While Basic Authentication is simple to implement and demonstrates access control, it has several weaknesses:
+No encryption – credentials can be intercepted over HTTP.
+
+
+No session or token management – user must send credentials with every request.
+
+
+Not scalable – for larger applications, managing many users becomes cumbersome.
+
+
+Recommendation: For production systems:
+Use HTTPS to encrypt credentials.
+
+
+Replace Basic Auth with JWT tokens or OAuth2 to improve security and scalability.
+
+
+Consider rate limiting and logging to prevent abuse.
+
+
+
+6. Conclusion
+This project demonstrates:
+Parsing XML data and converting it to structured JSON
+
+
+Implementing a REST API with CRUD operations and Basic Authentication
+
+
+Comparing DSA approaches for search efficiency (linear vs dictionary lookup)
+
+
+Documenting API endpoints and testing with Postman/curl
+
+
+Understanding the security limitations of Basic Auth and suggesting stronger alternatives
+
+
+All deliverables are provided in the GitHub repository, including source code, documentation, test screenshots, and setup instructions.
