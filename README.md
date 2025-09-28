@@ -25,11 +25,11 @@ MoMo_SMS/
 │   └─ parse_dsa.py     # XML parsing and DSA comparison code
 │
 ├─ screenshots/         # Screenshots of API test cases
-|- modified_sms_v2.xml
-├─ README.md            # Setup instructions
-└─ report.pdf           # PDF report with security analysis and DSA results
+└─ README.md            # Setup instructions
 
 ````
+## THE REPORT PDF FILE
+[report.pdf](https://github.com/user-attachments/files/22585723/report.pdf)
 
 ---
 
@@ -125,5 +125,6 @@ This README covers:
 - Setup and running instructions  
 - Authentication info  
 - How to test the API  
+
 
 
