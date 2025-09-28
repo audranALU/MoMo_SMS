@@ -76,9 +76,7 @@ class MoMoAPIHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(json.dumps(data, indent=2).encode())
 
-    # ------------------------
     # CRUD Endpoints
-    # ------------------------
     def do_GET(self):
         if not self.authenticate():
             return
@@ -168,9 +166,8 @@ class MoMoAPIHandler(BaseHTTPRequestHandler):
         except ValueError:
             self.send_json({"error": "Invalid ID"}, status=400)
 
-# ------------------------
+
 # Run Server
-# ------------------------
 if __name__ == "__main__":
     server_address = ('', 8000)
     httpd = HTTPServer(server_address, MoMoAPIHandler)
