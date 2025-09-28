@@ -4,9 +4,8 @@ import json
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import base64
 
-# ------------------------
+
 # Load and parse XML
-# ------------------------
 tree = ET.parse("../dsa/modified_sms_v2.xml")  # adjust path if needed
 root = tree.getroot()
 
@@ -46,9 +45,7 @@ for idx, record in enumerate(root.findall("sms"), start=1):
     transactions_list.append(transaction)
     transactions_dict[idx] = transaction
 
-# ------------------------
 # Basic Authentication
-# ------------------------
 USERNAME = "admin"
 PASSWORD = "password"
 
