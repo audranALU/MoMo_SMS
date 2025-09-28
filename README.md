@@ -18,11 +18,11 @@ MoMo_SMS/
 ├─ api/
 │   └─ server.py        # REST API with CRUD endpoints and Basic Auth
 │
-├─ dsa/
-│   └─ parse_dsa.py     # XML parsing and DSA comparison code
-│
 ├─ docs/
 │   └─ api_docs.md      # API documentation
+│
+├─ dsa/
+│   └─ parse_dsa.py     # XML parsing and DSA comparison code
 │
 ├─ screenshots/         # Screenshots of API test cases
 |- modified_sms_v2.xml
@@ -125,4 +125,5 @@ This README covers:
 - Setup and running instructions  
 - Authentication info  
 - How to test the API  
+
 
